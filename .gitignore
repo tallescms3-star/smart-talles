@@ -1,0 +1,26 @@
+# Banco local e dados gerados
+vendas.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Configurações/segredos locais
+config.json
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# SO / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Backups locais
+backup_*.json

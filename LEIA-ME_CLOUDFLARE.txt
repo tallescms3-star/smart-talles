@@ -1,0 +1,38 @@
+ACESSO PELA INTERNET - PC COMO SERVIDOR - SEM DOMINIO
+
+Esta versao foi preparada para voce usar o seu proprio PC como servidor.
+O sistema continua rodando em http://localhost:8080 e o Cloudflare cria uma
+ponte segura de saida para a internet.
+
+NAO E NECESSARIO COMPRAR DOMINIO PARA O MODO DE TESTE.
+
+COMO USAR
+1. Extraia o ZIP para uma pasta do computador.
+2. Execute iniciar_sistema_internet.bat.
+3. Na primeira vez, o programa baixa o cloudflared automaticamente.
+4. Uma URL parecida com:
+   https://alguma-coisa.trycloudflare.com
+   sera exibida na janela.
+5. Abra essa URL no celular, tablet ou outro computador.
+6. Para testar fora da sua rede, use o celular com 4G/5G em vez do Wi-Fi.
+
+IMPORTANTE
+- O PC precisa estar ligado.
+- O servidor precisa estar rodando.
+- A janela preta do iniciar_sistema_internet.bat precisa permanecer aberta.
+- O endereco trycloudflare.com e temporario e muda quando o tunnel reinicia.
+- Nao compartilhe tokens ou credenciais.
+- O sistema fica publicamente acessivel pelo link enquanto o Quick Tunnel estiver ativo.
+- O PIN de administrador do sistema continua protegendo as funcoes administrativas.
+
+COMO ENCERRAR
+Feche a janela do Cloudflare Tunnel ou pressione Ctrl+C nela.
+
+ENDERECO FIXO FUTURO
+Se depois voce quiser um endereco fixo, como vendas.seudominio.com.br,
+sera necessario usar um dominio proprio e configurar um Tunnel nomeado.
+
+OBSERVACAO
+O Quick Tunnel e indicado para testes e acessos temporarios. Para operacao
+continua de uma empresa, recomendamos depois configurar um dominio, HTTPS,
+controle de acesso e o Tunnel como servico do Windows.

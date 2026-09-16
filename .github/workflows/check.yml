@@ -1,0 +1,19 @@
+name: Verificar sistema
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Verificar sintaxe
+        run: python -m py_compile server.py
+      - name: Inicializar banco de teste
+        run: |
+          ADMIN_PIN=9999 DB_PATH=/tmp/vendas.db PORT=8080 python -c "import server; server.init_db(); print(len(server.products_all()), 'produtos carregados')"

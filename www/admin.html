@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071b33"><meta name="description" content="Smart Talles — Administração">
+<title>Smart Talles • Administração</title><link rel="manifest" href="manifest.json"><link rel="icon" type="image/png" href="logo_smart_talles.png"><link rel="stylesheet" href="style.css"></head>
+<body class="admin-page">
+<header class="site-header"><div class="header-inner"><a class="brand-link" href="index.html" aria-label="Smart Talles"><img class="brand-logo" src="logo_smart_talles.png" alt="Smart Talles"></a><div class="header-actions"><span class="status-pill"><i></i> Área administrativa</span><a class="ghost header-admin" href="index.html">← Voltar ao site</a></div></div></header>
+<main id="adminMain"><section class="admin-welcome"><span class="eyebrow">ÁREA RESTRITA</span><h1>Administração Smart Talles</h1><p>Gerencie produtos e acompanhe os orçamentos em uma página exclusiva.</p></section>
+<section id="admin" class="card admin-page-card"><div class="section-title"><div><span class="eyebrow">ÁREA RESTRITA</span><h2>Administração Smart Talles</h2><p class="section-subtitle">Escolha o que deseja gerenciar.</p></div><button id="closeAdmin" class="ghost">Fechar</button></div>
+    <div class="admin-nav" role="tablist" aria-label="Administração">
+      <button id="adminCadastroBtn" class="admin-nav-btn active" type="button"><span>📦</span><b>Cadastro de produtos</b><small>Adicionar, editar, importar e excluir</small></button>
+      <button id="adminRelatorioBtn" class="admin-nav-btn" type="button"><span>📋</span><b>Relatório de orçamentos</b><small>Consultar, filtrar, exportar e imprimir</small></button>
+    </div>
+    <div id="adminCadastro" class="admin-panel">
+      <p class="muted">Edite os campos abaixo e clique em <b>Salvar alterações</b> para gravar tudo diretamente no banco de dados do servidor.</p><div class="admin-actions"><button id="saveChanges" class="primary" type="button">💾 Salvar alterações</button><span id="saveStatus" class="muted" aria-live="polite"></span><button id="export" class="secondary">⬇ Exportar backup</button><label class="filebtn">📥 Importar produtos (Excel/CSV/JSON)<input id="import" type="file" accept=".xlsx,.csv,.txt,.json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,application/json"></label><label class="filebtn backup-restore-btn">♻️ Restaurar backup<input id="restoreBackup" type="file" accept=".json,application/json"></label><button id="reset" class="danger">↺ Restaurar planilha original</button></div><p class="muted import-help">Use <b>Exportar backup</b> para guardar a lista atual. Para voltar a esse arquivo, use <b>Restaurar backup</b>. A restauração substitui apenas os produtos; <b>orçamentos e numeração permanecem preservados</b>. Para adicionar produtos sem substituir os atuais, use a importação normal.</p><div class="addform"><select id="newCategory"><option value="Telas">Telas</option><option value="Acessórios">Acessórios</option></select><input id="newBrand" placeholder="Marca / fabricante"><input id="newModel" placeholder="Modelo / nome do produto"><input id="newPrice" type="number" step="0.01" placeholder="Preço de venda"><label id="newProductPhotoField" class="photo-add-field hidden">📷 Foto do acessório<input id="newProductImage" type="file" accept="image/jpeg,image/png,image/webp,image/gif"></label><button id="addProduct" class="primary">Adicionar produto</button></div><div id="tableWrap"></div>
+    </div>
+    <div id="adminRelatorio" class="admin-panel hidden">
+    <div class="section-title report-title"><div><span class="eyebrow">CONTROLE DE VENDAS</span><h2>Relatório de orçamentos</h2><p class="section-subtitle">Todos os orçamentos enviados pelo site ficam registrados no servidor.</p></div></div>
+    <div class="print-report-header">
+      <div class="print-branding">
+        <img src="logo_smart_talles.png" alt="Smart Talles" class="print-logo">
+        <div class="print-company">
+          <h1>SMART TALLES</h1>
+          <p>Telas • Acessórios • Tecnologia e assistência</p>
+          <span>Floriano/PI • Desde 2011</span>
+        </div>
+        <div class="print-contact">
+          <b>Atendimento</b><br>WhatsApp: (89) 9 9944-7494<br>R. Assad Kalume, Centro<br>Floriano/PI
+        </div>
+      </div>
+      <div class="print-report-heading">
+        <div><span>CONTROLE DE VENDAS</span><h2>Relatório de Orçamentos</h2><p>Orçamentos realizados e enviados pelo site</p></div>
+        <div class="print-period"><b>Emissão</b><span id="printGeneratedAt"></span></div>
+      </div>
+    </div>
+    <div class="report-toolbar"><input id="quoteSearch" placeholder="🔎 Buscar por cliente, telefone, produto ou nº do orçamento"><label>De <input id="quoteDateFrom" type="date"></label><label>Até <input id="quoteDateTo" type="date"></label><button id="refreshQuotes" class="secondary">↻ Atualizar</button><button id="exportQuotes" class="secondary">⬇ Exportar CSV</button><button id="printQuotes" class="ghost">🖨 Imprimir</button></div>
+    <div class="report-stats"><div><small>ORÇAMENTOS ENCONTRADOS</small><strong id="quotesCount">0</strong></div><div><small>VALOR TOTAL</small><strong id="quotesTotal">R$ 0,00</strong></div></div>
+    <div id="quotesWrap" class="quotes-wrap"><p class="empty-state"><span>🧾</span>Carregando orçamentos...</p></div>
+    <div class="print-report-footer">
+      <div class="print-thanks"><b>Obrigado pela preferência!</b><span>Smart Talles — Seu celular em boas mãos.</span><small>Produtos de qualidade • Atendimento especializado • Orçamentos e vendas</small></div>
+      <div class="print-signature">
+        <img src="assinatura_talles.png" alt="Assinatura de Talles Cristhian M. e Silva">
+        <div class="signature-line"></div>
+        <b>Talles Cristhian M. e Silva</b>
+        <span>Proprietário • Smart Talles</span>
+      </div>
+      <div class="print-legal"><span>SMART TALLES</span><span>WhatsApp: (89) 9 9944-7494</span><span>R. Assad Kalume, Centro — Floriano/PI</span><span>Pagamento online: Mercado Pago</span></div>
+    </div>
+    </div>
+  </section>
+</main><footer><span>Smart Talles • Administração</span><strong>Floriano/PI • Desde 2011</strong></footer>
+<script src="admin.js"></script><script>const nc=document.getElementById("newCategory"),pf=document.getElementById("newProductPhotoField");function togglePhotoField(){pf.classList.toggle("hidden",nc.value!=="Acessórios")}nc.addEventListener("change",togglePhotoField);togglePhotoField();</script></body></html>

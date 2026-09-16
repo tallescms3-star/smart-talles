@@ -1,0 +1,2 @@
+# O servidor usa somente a biblioteca padrão do Python.
+# Este arquivo existe para facilitar detectores de hospedagem.
