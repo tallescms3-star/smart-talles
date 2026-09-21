@@ -21,8 +21,58 @@ $('restoreBackup').onchange=async e=>{const f=e.target.files[0];if(!f)return;try
 $('reset').onclick=async()=>{if(!confirm('ATENÇÃO\n\nRestaurar a lista original da planilha?\n\nIsso substituirá os produtos atuais, mas NÃO apagará os orçamentos já registrados nem a numeração dos orçamentos.\n\nDeseja continuar?'))return;try{await api('/api/restore',{method:'POST',headers:{'X-Admin-Pin':adminPin}});await load();alert('Lista original restaurada. Os orçamentos foram preservados.')}catch(e){alert(e.message)}};
 function quoteDate(q){return new Date(q.created_at)}
 function filteredQuotes(){const term=$('quoteSearch').value.trim().toLowerCase(),from=$('quoteDateFrom').value,to=$('quoteDateTo').value;return quotes.filter(q=>{const d=quoteDate(q),ds=Number.isNaN(d.getTime())?'':d.toISOString().slice(0,10);if(from&&ds<from)return false;if(to&&ds>to)return false;const num=String(q.quote_number??'').trim(),numInt=String(parseInt(num,10)||0),pad=numInt.padStart(4,'0');if(!term)return true;const numberMatch=term.match(/^(?:#|orçamento\s*n?[º°]?\s*)?0*(\d+)$/i);if(numberMatch){const wanted=String(parseInt(numberMatch[1],10));return numInt===wanted||num===numberMatch[1]||pad===term.replace(/^#/, '')}const hay=[q.client_name,q.client_phone,(q.items||[]).map(x=>`${x.brand} ${x.model}`).join(' ')].join(' ').toLowerCase();return hay.includes(term)})}
-function normalizeClientWhatsApp(phone){let n=String(phone??'').replace(/\D/g,'');if(!n)return '';if(n.startsWith('55')&&(n.length===12||n.length===13))return n;n=n.replace(/^0+/,'');return n.startsWith('55')?n:'55'+n}
-function contactClientByNumber(number){const q=quotes.find(x=>Number(x.quote_number)===Number(number));if(!q)return;const phone=normalizeClientWhatsApp(q.client_phone);if(!phone)return alert('Este orçamento não possui um número de WhatsApp válido.');const name=String(q.client_name||'').trim();const num=String(q.quote_number??'').padStart(4,'0');const items=(q.items||[]).map(x=>`• ${x.category==='Acessórios'?'Acessório':'Tela'} — ${x.model} — ${money(x.price)}`).join('\\n');const msg=`📋 NOVO ORÇAMENTO — SMART TALLES\\n\\n🔢 Orçamento nº ${num}\\n\\n👤 Cliente: ${name||'Não informado'}\\n📱 WhatsApp: ${q.client_phone||'Não informado'}\\n\\n🛒 Itens do orçamento:\\n${items||'• Nenhum item informado'}\\n\\n💰 Total do orçamento: ${money(q.total)}\\n\\n━━━━━━━━━━━━━━━━━━\\n\\n📌 Olá${name?' '+name:''}! Estamos entrando em contato para dar prosseguimento ao seu orçamento realizado pelo site da Smart Talles. Podemos concluir sua venda? 😊`;window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,'_blank')}
+
+function normalizeClientWhatsApp(value){
+  let s=String(value||'').trim();
+  let digits=s.replace(/\D/g,'');
+  if(!digits)return '';
+  if(digits.startsWith('00'))digits=digits.slice(2);
+  if(digits.startsWith('55') && digits.length>=12)return digits;
+  digits=digits.replace(/^0+/,'');
+  return '55'+digits;
+}
+function formatClientPhone(value){
+  const digits=String(value||'').replace(/\D/g,'');
+  if(digits.startsWith('55') && digits.length>=12){
+    const local=digits.slice(2);
+    if(local.length===11)return `(${local.slice(0,2)}) ${local.slice(2,7)}-${local.slice(7)}`;
+    if(local.length===10)return `(${local.slice(0,2)}) ${local.slice(2,6)}-${local.slice(6)}`;
+  }
+  return value||'';
+}
+function contactClientByNumber(quoteNumber){
+  const q=quotes.find(x=>String(x.quote_number)===String(quoteNumber));
+  if(!q)return alert('Orçamento não encontrado.');
+  const phone=normalizeClientWhatsApp(q.client_phone);
+  if(!phone)return alert('Este orçamento não possui WhatsApp do cliente.');
+  const clientName=q.client_name||'Não informado';
+  const customerPhone=formatClientPhone(q.client_phone);
+  const items=(q.items||[]).map(x=>{
+    const category=String(x.category||'').toLowerCase().includes('acess')?'🔧 Acessório':'📱 Tela';
+    const label=[x.brand,x.model].filter(Boolean).join(' ').trim()||'Produto';
+    return `• ${category} — ${label} — ${money(x.price)}`;
+  }).join('\n');
+  const msg=[
+    '📋 NOVO ORÇAMENTO — SMART TALLES',
+    '',
+    `🔢 Orçamento nº ${String(q.quote_number).padStart(4,'0')}`,
+    '',
+    `👤 Cliente: ${clientName}`,
+    '',
+    `📱 WhatsApp: ${customerPhone||q.client_phone||'Não informado'}`,
+    '',
+    '🛒 Itens do orçamento:',
+    items||'• Nenhum item informado',
+    '',
+    `💰 Total do orçamento: ${money(q.total)}`,
+    '',
+    '━━━━━━━━━━━━━━━━━━',
+    '',
+    '📌 Cliente realizou um novo orçamento pelo site.'
+  ].join('\n');
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
 function renderQuotes(){const arr=filteredQuotes(),total=arr.reduce((s,q)=>s+Number(q.total||0),0);$('quotesCount').textContent=arr.length.toLocaleString('pt-BR');$('quotesTotal').textContent=money(total);$('quotesWrap').innerHTML=arr.length?arr.map(q=>{const d=quoteDate(q),date=Number.isNaN(d.getTime())?q.created_at:new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeStyle:'short'}).format(d),items=(q.items||[]).map(x=>`<li>${esc(x.brand)} — ${esc(x.model)} <b>${money(x.price)}</b></li>`).join('');return `<article class="quote-report-row"><div class="quote-report-head"><strong>Orçamento Nº ${String(q.quote_number).padStart(4,'0')}</strong><time>${esc(date)}</time></div><div class="quote-report-grid"><div><small>CLIENTE</small><b>${esc(q.client_name||'Não informado')}</b></div><div><small>TELEFONE</small><b>${esc(q.client_phone||'Não informado')}</b></div><div><small>VALOR</small><b>${money(q.total)}</b></div></div><div class="quote-report-items"><small>PRODUTOS</small><ul>${items}</ul></div><div class="quote-report-actions"><button class="secondary contact-client-btn" type="button" onclick="contactClientByNumber(${q.quote_number})">💬 Contatar cliente</button></div></article>`}).join(''):'<p class="empty-state"><span>🧾</span>Nenhum orçamento encontrado no período/filtro.</p>'}
 async function loadQuotes(){if(!adminPin)return;try{quotes=await api('/api/quotes',{headers:{'X-Admin-Pin':adminPin}});renderQuotes()}catch(e){alert(e.message)}}
 function csvCell(v){return `"${String(v??'').replace(/"/g,'""')}"`}

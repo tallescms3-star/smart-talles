@@ -72,7 +72,52 @@ function formatPhoneNumber(value){
 $('phone')?.addEventListener('input',e=>{e.target.value=formatPhoneNumber(e.target.value)});
 $('countryCode')?.addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,4)});
 
-async function sendWhatsApp(){if(!cart.length){const x=selected();if(x&&Number(x.price)>0)cart.push({...x});renderCart()}if(!cart.length)return alert('Adicione um item ao orçamento.');const phone=normalizeWhatsAppNumber();if(!phone)return alert('Informe o WhatsApp do cliente.');const name=$('client').value.trim();const total=cart.reduce((s,x)=>s+Number(x.price||0),0);try{const payload={client_name:name,client_phone:phone,total,items:cart.map(x=>({id:x.id,category:x.category||'Telas',brand:x.brand,model:x.model,price:Number(x.price||0)}))};const q=await api('/api/quote/next',{method:'POST',body:JSON.stringify(payload)});quoteNumber=q.number;updateQuote();$('send').disabled=true;$('send').textContent='✓ Orçamento salvo — abrindo WhatsApp...';const msg=`Olá${name?' '+name:''}!\n\n*Orçamento Nº ${String(quoteNumber).padStart(4,'0')}*\n\n${cart.map(x=>`• ${x.brand} ${x.model} — ${money(x.price)}`).join('\n')}\n\n*Total: ${money(total)}*\n\n💳 *Pagamento online:* ${COMPANY.paymentLink}\n\nObrigado por escolher a *Smart Talles*! 📱💙`;window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,'_blank');$('send').disabled=false;$('send').textContent='💾 Salvar e Enviar pelo WhatsApp';if($('admin')&&!$('admin').classList.contains('hidden'))loadQuotes()}catch(e){alert(e.message)}}
+function formatCustomerPhone(value){
+  let n=String(value||'').replace(/\D/g,'');
+  if(n.startsWith('55'))n=n.slice(2);
+  if(n.length===11)return `(${n.slice(0,2)}) ${n.slice(2,7)}-${n.slice(7)}`;
+  if(n.length===10)return `(${n.slice(0,2)}) ${n.slice(2,6)}-${n.slice(6)}`;
+  return String(value||'');
+}
+async function sendWhatsApp(){
+  if(!cart.length){const x=selected();if(x&&Number(x.price)>0)cart.push({...x});renderCart()}
+  if(!cart.length)return alert('Adicione um item ao orçamento.');
+  const phone=normalizeWhatsAppNumber();
+  if(!phone)return alert('Informe o WhatsApp do cliente.');
+  const name=$('client').value.trim();
+  const total=cart.reduce((s,x)=>s+Number(x.price||0),0);
+  try{
+    const payload={client_name:name,client_phone:phone,total,items:cart.map(x=>({id:x.id,category:x.category||'Telas',brand:x.brand,model:x.model,price:Number(x.price||0)}))};
+    const q=await api('/api/quote/next',{method:'POST',body:JSON.stringify(payload)});
+    quoteNumber=q.number;updateQuote();
+    $('send').disabled=true;$('send').textContent='✓ Orçamento salvo — abrindo WhatsApp...';
+    const displayPhone=formatCustomerPhone(phone);
+    const items=cart.map(x=>`• ${(x.category||'Telas')==='Acessórios'?'🔧 Acessório':'📱 Tela'} — ${x.model} — ${money(x.price)}`).join('\n');
+    const msg=`📋 NOVO ORÇAMENTO — SMART TALLES
+
+🔢 Orçamento nº ${String(quoteNumber).padStart(4,'0')}
+
+👤 Cliente: ${name||'Não informado'}
+
+📱 WhatsApp: ${displayPhone||phone}
+
+🛒 Itens do orçamento:
+${items}
+
+💰 Total do orçamento: ${money(total)}
+
+━━━━━━━━━━━━━━━━━━
+
+📌 Cliente realizou um novo orçamento pelo site.`;
+    const ownerWhatsApp='5589999447494';
+    window.open(`https://wa.me/${ownerWhatsApp}?text=${encodeURIComponent(msg)}`,'_blank');
+    $('send').disabled=false;$('send').textContent='💾 Salvar e Enviar pelo WhatsApp';
+    if($('admin')&&!$('admin').classList.contains('hidden'))loadQuotes();
+  }catch(e){
+    $('send').disabled=false;$('send').textContent='💾 Salvar e Enviar pelo WhatsApp';
+    alert(e.message);
+  }
+}
 $('send').onclick=sendWhatsApp;
 
 // Botão lateral para voltar rapidamente ao início da página
