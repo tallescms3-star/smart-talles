@@ -1,0 +1,25 @@
+SMART TALLES - CORRECAO DO FILTRO V5
+
+A V4 criou a caixa, mas nao filtrava os acessorios porque os cards
+ficam dentro de .accessory-grid. A V5 corrige exatamente essa estrutura.
+
+INSTALACAO:
+1. Pare o servidor.
+2. Extraia os arquivos para:
+   C:\Users\Home\Documents\GitHub\smart-talles
+3. Execute:
+   INSTALAR_CORRECAO_FILTRO_CATALOGO_V5.bat
+4. Inicie o servidor.
+5. Abra http://localhost:8080
+6. Pressione Ctrl + Shift + R.
+7. Teste Acessorios e Telas.
+
+NAO execute os instaladores anteriores.
+
+A V5:
+- mantem a caixa de pesquisa;
+- filtra os cards de Acessorios dentro de .accessory-grid;
+- filtra os cards de marcas em Telas;
+- filtra em tempo real;
+- nao altera app.js, style.css, index.html ou vendas.db;
+- cria backup do catalog-filter-v4.js.

@@ -1,0 +1,18 @@
+CORREÇÃO DO ADMIN - SMART TALLES
+
+1. Extraia estes arquivos diretamente em:
+C:\Users\Home\Documents\GitHub\smart-talles
+
+2. Execute:
+EXECUTAR_CORRECAO_ADMIN.bat
+
+3. Abra o GitHub Desktop.
+
+Deixe marcados SOMENTE:
+- www\admin.js
+- www\app.js
+- www\index.html
+
+Os arquivos .py/.bat/.txt devem ficar desmarcados.
+
+Esta correção coloca o botão "Contatar cliente" no relatório e garante que a mensagem do WhatsApp use quebras de linha reais, incluindo nome, número do orçamento, WhatsApp do cliente, todos os produtos e valores e total.

@@ -1,0 +1,15 @@
+PESQUISA DE ACESSÓRIOS — INSTALAÇÃO SEGURA
+
+Esta versão preserva o app.js e o vendas.db.
+O instalador altera somente www/index.html e cria www/accessory-search.js.
+Ele também cria backup automático do index.html.
+
+1. Extraia este pacote dentro de C:\Users\Home\Documents\GitHub\smart-talles
+2. Execute INSTALAR_PESQUISA_ACESSORIOS_SEGURA.bat
+3. NÃO execute os instaladores antigos V1/V2/V3.
+4. Inicie com iniciar_servidor.
+5. Abra http://localhost:8080
+6. Em Nova venda, selecione Acessórios.
+7. Use Pesquisar acessórios e teste antes de publicar no GitHub/Railway.
+
+A pesquisa procura em modelo/nome, marca, compatibilidade, SKU e descrição quando esses campos existirem. O filtro é ao digitar, sem botão de pesquisar. As imagens são maiores e há botão Adicionar ao orçamento.

@@ -1,0 +1,24 @@
+CORREÇÃO WHATSAPP — SMART TALLES
+
+1. Copie este arquivo para a pasta raiz do projeto:
+   C:\Users\Home\Documents\GitHub\smart-talles
+
+2. Abra o arquivo corrigir_whatsapp.py com duplo clique se o Windows estiver configurado para executar Python; ou execute no Prompt:
+   python corrigir_whatsapp.py
+
+3. A correção altera apenas:
+   - www/index.html
+   - www/app.js
+   - www/style.css
+
+4. O campo WhatsApp passa a ter:
+   DDI: 55 (Brasil) — editável
+   Número: campo separado
+
+5. Exemplos:
+   DDI 55 + 89 99944-7494 -> 5589999447494
+   DDI 351 + 912345678 -> 351912345678
+
+6. O sistema evita duplicar o DDI se o usuário colar um número internacional completo.
+
+7. Depois de executar e testar, abra o GitHub Desktop. Ele deverá mostrar as alterações. Faça Commit e Push origin para atualizar o GitHub e, em seguida, o Railway fará o novo deploy.

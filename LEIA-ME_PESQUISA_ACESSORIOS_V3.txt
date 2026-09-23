@@ -1,0 +1,18 @@
+SMART TALLES - PESQUISA DE ACESSÓRIOS V3
+
+O pacote V2 apresentou um problema no arquivo de comando do Windows. Esta V3 corrige SOMENTE a forma de executar o instalador.
+
+1. Extraia esta pasta dentro de:
+   C:\Users\Home\Documents\GitHub\smart-talles
+
+2. Entre na pasta do pacote.
+
+3. Dê dois cliques em:
+   EXECUTAR_PESQUISA_ACESSORIOS_V3.cmd
+
+4. Aguarde aparecer uma mensagem começando por OK ou informando que a correção foi instalada.
+
+IMPORTANTE:
+- Não faça Push ainda.
+- Depois de instalar, abra o sistema localmente e teste Acessórios > Pesquisar acessórios.
+- Se aparecer qualquer mensagem de erro, envie uma foto da janela preta.

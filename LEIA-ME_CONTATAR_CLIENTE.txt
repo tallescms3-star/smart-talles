@@ -1,0 +1,26 @@
+CORREÇÃO — CONTATAR CLIENTE — SMART TALLES
+
+Esta versão foi preparada para o admin.js atual do projeto.
+
+O botão "💬 Contatar cliente" passa a:
+- abrir o WhatsApp do cliente;
+- incluir o nome;
+- incluir o número do orçamento;
+- incluir o WhatsApp cadastrado;
+- incluir todos os produtos e respectivos valores;
+- incluir o total;
+- deixar uma mensagem pronta para dar prosseguimento à venda.
+
+INSTALAÇÃO:
+1. Extraia estes arquivos diretamente em:
+   C:\Users\Home\Documents\GitHub\smart-talles
+2. Execute:
+   EXECUTAR_CORRECAO_CONTATAR_CLIENTE.bat
+3. Pressione uma tecla ao terminar.
+4. Abra o GitHub Desktop.
+5. Confirme que a alteração é somente em:
+   www\admin.js
+6. Faça o Commit:
+   Adicionar mensagem pronta no botão Contatar cliente
+7. Clique em Push origin.
+8. Aguarde o Railway publicar.

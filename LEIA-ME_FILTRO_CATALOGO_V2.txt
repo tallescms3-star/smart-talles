@@ -1,0 +1,22 @@
+FILTRO DO CATALOGO - SMART TALLES - V2 SEGURO
+
+IMPORTANTE
+- Feche/pare o servidor local antes de instalar.
+- Execute este .bat na pasta principal smart-talles.
+- Nao apague nem substitua vendas.db.
+- Nao execute instaladores antigos de filtro de catalogo.
+
+O instalador:
+- cria backup automatico de www/index.html;
+- cria www/catalog-filter-v2.js;
+- altera somente www/index.html para carregar o novo filtro;
+- nao altera app.js, style.css ou vendas.db.
+
+Depois:
+1) Inicie o servidor local.
+2) Abra http://localhost:8080
+3) Use Ctrl+Shift+R.
+4) Na area do catalogo, a caixa "Pesquisar no catalogo" deve aparecer acima dos produtos.
+5) Digite parte do modelo, marca ou nome. O filtro atua enquanto voce digita.
+
+Se algo ficar estranho, NAO execute outro instalador. Envie uma foto da tela.

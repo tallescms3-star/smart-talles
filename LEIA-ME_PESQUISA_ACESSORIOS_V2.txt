@@ -1,0 +1,37 @@
+CORREÇÃO V2 — PESQUISA DE ACESSÓRIOS SMART TALLES
+
+O instalador V2 foi preparado para não depender de um trecho exato do index.html.
+A versão anterior parou porque a sua cópia local tem uma estrutura diferente da que foi usada para montar o primeiro pacote.
+
+COMO INSTALAR
+1. Extraia esta pasta dentro de:
+   C:\Users\Home\Documents\GitHub\smart-talles
+
+2. Abra a pasta extraída e dê duplo clique em:
+   EXECUTAR_PESQUISA_ACESSORIOS_V2.bat
+
+3. Se aparecer:
+   "OK: pesquisa de acessórios V2 instalada..."
+   a alteração foi aplicada.
+
+4. Feche a janela preta.
+
+5. Abra o Smart Talles localmente e teste ANTES de fazer Push.
+
+O QUE A V2 ADICIONA
+- Botão "🔎 Pesquisar acessórios" quando Acessórios estiver selecionado.
+- Janela/modal de pesquisa.
+- Filtro instantâneo enquanto você digita.
+- Pesquisa por nome, modelo, marca, SKU e compatibilidade.
+- Imagens maiores.
+- Botão "＋ Adicionar ao orçamento" diretamente no resultado.
+- Usa os produtos de acessórios já carregados pelo sistema.
+
+SEGURANÇA
+Antes de alterar os arquivos, o instalador cria cópias locais de:
+- www\index.html.backup_pesquisa_acessorios
+- www\app.js.backup_pesquisa_acessorios
+- www\style.css.backup_pesquisa_acessorios
+
+IMPORTANTE
+Não faça Push ainda. Primeiro vamos abrir o sistema, testar a pesquisa e conferir se ficou exatamente como você quer.

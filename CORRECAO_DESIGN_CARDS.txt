@@ -1,0 +1,12 @@
+CORREÇÃO DO DESIGN DOS CARDS DE ACESSÓRIOS
+
+Correções aplicadas:
+1. O .brand-grid ocupava o conteúdo de Acessórios em apenas uma das 3 colunas, deixando os cards estreitos.
+2. O .accessory-grid agora ocupa toda a largura do catálogo (grid-column: 1 / -1).
+3. A quebra de texto foi ajustada para evitar quebrar palavras no meio quando não for necessário.
+
+Arquivos alterados:
+- www/style.css
+- www/cards-acessorios-v2.js
+
+Depois de substituir os arquivos no projeto, faça commit/push pelo GitHub Desktop. O Railway deverá fazer o deploy normalmente.

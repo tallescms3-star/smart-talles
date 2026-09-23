@@ -1,0 +1,34 @@
+PESQUISA DE ACESSÓRIOS + FILTRO DO CATÁLOGO — SMART TALLES
+
+IMPORTANTE
+Este pacote foi feito como complemento da Pesquisa de Acessórios Segura já instalada.
+
+Ele:
+- mantém a pesquisa de acessórios existente;
+- acrescenta um filtro de catálogo com pesquisa em tempo real;
+- pesquisa modelo, nome, marca, SKU, categoria e compatibilidade;
+- respeita a categoria Telas/Acessórios;
+- NÃO altera app.js;
+- NÃO altera style.css;
+- NÃO altera vendas.db.
+
+INSTALAÇÃO
+1. Feche o servidor local (recomendado).
+2. Extraia o conteúdo deste pacote na pasta:
+   C:\Users\Home\Documents\GitHub\smart-talles
+3. Execute:
+   INSTALAR_FILTRO_CATALOGO_SEGURO.bat
+4. Inicie o servidor novamente.
+5. Abra http://localhost:8080
+6. Pressione Ctrl+Shift+R.
+7. Teste primeiro localmente.
+
+NÃO envie para o GitHub antes de testar.
+
+ALTERAÇÕES ESPERADAS
+- www/index.html
+- www/catalog-filter.js
+
+O backup automático do index.html NÃO precisa ser enviado ao GitHub.
+
+Se aparecer qualquer erro, não execute outro instalador. Pare e envie uma foto da tela.

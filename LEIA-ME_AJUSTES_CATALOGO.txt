@@ -1,0 +1,26 @@
+AJUSTES DO CATÁLOGO — SMART TALLES
+
+Esta alteração é somente visual/comportamental no catálogo.
+
+1. Ao carregar o site, a categoria padrão passa a ser Acessórios.
+2. As imagens dos cards de acessórios ficam um pouco maiores.
+3. Não altera app.js.
+4. Não altera style.css.
+5. Não altera vendas.db.
+6. Faz backup automático do www/index.html antes da alteração.
+
+INSTALAÇÃO
+- Pare o servidor local, se estiver aberto.
+- Extraia esta pasta dentro de:
+  C:\Users\Home\Documents\GitHub\smart-talles
+- Execute:
+  INSTALAR_AJUSTES_CATALOGO.bat
+- Inicie novamente o servidor.
+- Abra http://localhost:8080
+- Faça Ctrl+Shift+R para recarregar sem usar o cache.
+
+TESTE
+- Ao abrir o site, Acessórios deve aparecer selecionado automaticamente.
+- Os produtos acessórios devem continuar aparecendo normalmente.
+- As imagens devem estar maiores.
+- O filtro de catálogo e a pesquisa de acessórios devem continuar funcionando.

@@ -1,0 +1,31 @@
+SMART TALLLES - FILTRO DO CATALOGO V3 (SEGURO)
+
+Esta versao foi feita para o catalogo que aparece na tela com:
+- botoes Telas / Acessorios
+- area de cards dentro de #brandCards
+
+O filtro e criado acima dos cards e pesquisa em tempo real o texto
+que aparece nos cards.
+
+INSTALACAO:
+1. Pare o servidor local.
+2. Extraia estes arquivos para a pasta principal do projeto:
+   C:\Users\Home\Documents\GitHub\smart-talles
+3. Execute:
+   INSTALAR_FILTRO_CATALOGO_V3_SEGURO.bat
+4. Inicie o servidor.
+5. Abra http://localhost:8080
+6. Pressione Ctrl + Shift + R.
+7. Role ate CATALOGO.
+
+DEVE APARECER:
+🔎 Pesquisar no catálogo: modelo, marca, nome ou SKU...
+
+IMPORTANTE:
+- Nao altera app.js
+- Nao altera style.css
+- Nao altera vendas.db
+- Cria backup automatico de www/index.html
+- Nao execute instaladores antigos de filtro.
+
+Se nao aparecer, nao instale outro pacote. Envie uma foto da tela e da pasta www.

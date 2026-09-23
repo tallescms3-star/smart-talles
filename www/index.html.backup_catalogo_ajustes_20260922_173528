@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071b33">
+<meta name="description" content="Smart Talles — Orçamentos e vendas">
+<title>Smart Talles • Orçamentos & Vendas</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="logo_smart_talles.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand-link" href="#top" aria-label="Smart Talles">
+      <img class="brand-logo" src="logo_smart_talles.png" alt="Smart Talles">
+    </a>
+    <div class="header-actions">
+      <span class="status-pill"><i></i> Sistema online</span>
+      <a id="adminBtn" class="ghost header-admin" href="admin.html">⚙ Administração</a>
+    </div>
+  </div>
+</header>
+
+<div class="support-banner" role="region" aria-label="Suporte remoto">
+  <div class="support-marquee">
+    <div class="support-marquee-track">
+      <span class="support-message">Precisa de um suporte remoto? Clique aqui</span>
+      <a class="support-button" href="https://www.google.com/url?q=https%3A%2F%2Fanydesk.com%2Fpt%2Fdownloads%2Fthank-you%3Fdv%3Dwin_exe&sa=D&sntz=1&usg=AOvVaw0zovmgcBNWc4YbB9fdvEpW" target="_blank" rel="noopener noreferrer">🛠️ CLIQUE AQUI — SUPORTE REMOTO</a>
+      <span class="support-separator">•</span>
+      <span class="support-message">Precisa de um suporte remoto? Clique aqui</span>
+      <a class="support-button" href="https://www.google.com/url?q=https%3A%2F%2Fanydesk.com%2Fpt%2Fdownloads%2Fthank-you%3Fdv%3Dwin_exe&sa=D&sntz=1&usg=AOvVaw0zovmgcBNWc4YbB9fdvEpW" target="_blank" rel="noopener noreferrer">🛠️ CLIQUE AQUI — SUPORTE REMOTO</a>
+      <span class="support-separator">•</span>
+    </div>
+  </div>
+</div>
+
+<main id="top">
+  <section class="hero card">
+    <div class="hero-copy">
+      <span class="eyebrow">SMART TALLES • FLORIANO/PI</span>
+      <h1>Venda mais. <span>Atenda melhor.</span></h1>
+      <p>Monte seu orçamento em segundos e envie direto para o WhatsApp do cliente.</p>
+      <div class="hero-actions">
+        <a class="primary hero-button" href="#nova-venda">＋ Nova venda</a>
+        <a class="secondary hero-button" href="#sobre">Conheça a loja</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="foto_talles.jpg" alt="Talles — Smart Talles">
+      <div class="photo-badge"><strong>Desde 2011</strong><span>Tecnologia e assistência</span></div>
+    </div>
+  </section>
+
+  <section class="stats-grid" aria-label="Resumo do sistema">
+    <article class="stat-card"><span class="stat-icon">▦</span><div><small>Produtos</small><strong id="productCount">—</strong></div></article>
+    <article class="stat-card"><span class="stat-icon">◈</span><div><small>Marcas</small><strong id="brandCount">—</strong></div></article>
+    <article class="stat-card"><span class="stat-icon">▱</span><div><small>Orçamento atual</small><strong id="quoteNumberTop">0001</strong></div></article>
+    <article class="stat-card accent"><span class="stat-icon">✓</span><div><small>Atendimento</small><strong>WhatsApp</strong></div></article>
+  </section>
+
+  <section class="card shortcuts">
+    <div class="section-title"><div><span class="eyebrow">ACESSO RÁPIDO</span><h2>O que você precisa?</h2></div></div>
+    <div class="shortcut-grid">
+      <a href="#nova-venda" class="shortcut"><span>🧾</span><b>Novo orçamento</b><small>Monte uma venda</small></a>
+      <a href="#marcas" class="shortcut"><span>📱</span><b>Ver marcas</b><small>Samsung, Motorola, Xiaomi...</small></a>
+      <a href="#sobre" class="shortcut"><span>🏪</span><b>Dados da loja</b><small>Contato e localização</small></a>
+      <a href="https://link.mercadopago.com.br/smarttalles" class="shortcut payment-shortcut" target="_blank" rel="noopener"><span>💳</span><b>Pagar pelo Mercado Pago</b><small>Pagamento online</small></a>
+      <a id="quickAdmin" class="shortcut" href="admin.html"><span>⚙️</span><b>Gerenciar produtos</b><small>Editar sua tabela</small></a>
+    </div>
+  </section>
+
+  <section id="nova-venda" class="card sale-card">
+    <div class="section-title"><div><span class="eyebrow">NOVA VENDA</span><h2>Monte seu orçamento</h2><p class="section-subtitle">Escolha a marca, selecione o modelo e envie a proposta.</p></div><span class="quote-number">Orçamento Nº <strong id="quoteNumber">0001</strong></span></div>
+    <div class="form-grid">
+      <label>Tipo de produto<select id="categorySelect" onchange="setCategory(this.value)"><option value="Telas" selected>📱 Telas</option><option value="Acessórios">🛍️ Acessórios</option></select></label>
+      <label><span id="saleCategoryLabel">Telas</span> — marca / item<select id="brand"><option>Carregando...</option></select></label>
+      <label>Produto / modelo e valor<select id="model" disabled><option>Selecione a marca primeiro...</option></select></label>
+    </div>
+    <div id="accessoryPreview" class="accessory-preview hidden"><div class="accessory-preview-photo"><img id="accessoryPreviewImg" alt="Imagem do acessório"></div><div><span class="preview-label">IMAGEM DO PRODUTO</span><strong id="accessoryPreviewName">—</strong><small id="accessoryPreviewSku">Acessório</small><p>Imagem correspondente ao produto selecionado no catálogo.</p></div></div><div class="price"><div class="product-preview"><img id="productImage" class="product-image hidden" alt="Imagem do produto"><div><span>Valor da venda</span><small id="priceHint">Preço cadastrado no sistema</small></div></div><strong id="price">R$ 0,00</strong></div>
+    <div class="customer-grid"><label>Nome do cliente <small>(opcional)</small><input id="client" placeholder="Ex.: João Silva"></label><div class="phone-field"><span class="field-label">WhatsApp do cliente</span><div class="phone-inputs"><label class="country-code-label" title="Código do país"><span>DDI</span><input id="countryCode" inputmode="numeric" value="55" maxlength="4" aria-label="Código do país" autocomplete="tel-country-code"></label><label class="phone-number-label"><span>Número</span><input id="phone" inputmode="tel" placeholder="89 99944-7494" aria-label="Número do WhatsApp" autocomplete="tel"></label></div><small class="phone-help">Brasil (+55) vem selecionado. Para outro país, altere o DDI.</small></div></div>
+    <section class="card cart-card">
+    <div class="section-title"><div><span class="eyebrow">RESUMO DA VENDA</span><h2>Seu orçamento</h2></div><button id="clear" class="ghost">Limpar</button></div>
+    <div id="cart"><p class="empty-state"><span>🛒</span>Nenhum item adicionado ainda.</p></div>
+    <div class="total"><span>Total do orçamento</span><strong id="total">R$ 0,00</strong></div>
+  </section>
+    <div class="actions"><button id="add" class="secondary">＋ Adicionar ao orçamento</button><button id="send" class="primary">💾 Salvar e Enviar pelo WhatsApp</button></div>
+    <a class="payment-button" href="https://link.mercadopago.com.br/smarttalles" target="_blank" rel="noopener">💳 Pagar este orçamento pelo Mercado Pago</a>
+  </section>
+
+
+  <section id="marcas" class="card brands-card">
+    <div class="section-title"><div><span class="eyebrow">CATÁLOGO</span><h2>Produtos disponíveis</h2><p class="section-subtitle">Escolha uma categoria para ver as marcas e produtos.</p></div></div>
+    <div class="category-tabs"><button class="category-tab active" data-category="Telas" onclick="setCategory('Telas')">📱 Telas</button><button class="category-tab" data-category="Acessórios" onclick="setCategory('Acessórios')">🛍️ Acessórios</button></div>
+    <div id="brandCards" class="brand-grid"></div>
+  </section>
+
+  
+
+  <section id="sobre" class="company-card card">
+    <div class="company-main"><div class="mini-logo"><img src="logo_smart_talles.png" alt="ST"></div><div><span class="eyebrow light">SOBRE A LOJA</span><h2>Smart Talles</h2><p>Manutenção de smartphones e computadores, com atendimento rápido, personalizado e eficiente.</p></div></div>
+    <div class="company-details">
+      <a href="https://www.google.com/maps/search/?api=1&query=R.%20Assad%20Kalume%2C%20Floriano%2C%20PI" target="_blank" rel="noopener"><span>📍</span><span><b>Localização</b><br>R. Assad Kalume, Centro — Floriano/PI</span></a>
+      <a href="https://wa.me/5589999447494" target="_blank" rel="noopener"><span>📱</span><span><b>WhatsApp</b><br>(89) 9 9944-7494</span></a>
+      <a href="https://link.mercadopago.com.br/smarttalles" target="_blank" rel="noopener"><span>💳</span><span><b>Pagamento online</b><br>Mercado Pago</span></a>
+      <a href="https://www.instagram.com/smart_talles/" target="_blank" rel="noopener" class="instagram-store"><span>📸</span><span><b>Instagram da loja</b><br>@smart_talles</span></a>
+      <a href="https://www.instagram.com/tallescristhian/" target="_blank" rel="noopener" class="instagram-personal"><span>📸</span><span><b>Instagram pessoal</b><br>@tallescristhian</span></a>
+      <div><span>🛠️</span><span><b>Especialidade</b><br>Smartphones e computadores</span></div>
+    </div>
+  </section>
+</main>
+<button id="weatherTab" class="weather-tab" type="button" aria-label="Abrir clima e qualidade do ar" title="Clima e qualidade do ar"><span class="weather-tab-icon">☀️</span><span>CLIMA</span></button>
+<div id="weatherPanel" class="weather-panel" aria-hidden="true">
+  <div class="weather-panel-head"><div><strong>Clima em Floriano/PI</strong><small>Temperatura e qualidade do ar</small></div><button id="weatherClose" class="weather-close" type="button" aria-label="Fechar">×</button></div>
+  <div id="weatherContent"><div class="weather-current"><div class="weather-temp">—°C</div><div class="weather-condition">Carregando clima...</div></div></div>
+  <div class="weather-source">Dados atualizados automaticamente. Qualidade do ar baseada no índice US AQI e concentrações de partículas.</div>
+</div>
+<button id="backToTop" class="back-to-top" type="button" aria-label="Rolar ao início" title="Rolar ao início"><span class="back-to-top-arrow">↑</span><span>INÍCIO</span></button>
+<footer><strong>SMART TALLES</strong><span>Floriano • Piauí</span><span>Desde 2011</span><span>Orçamentos & Vendas</span></footer>
+<script src="app.js"></script>
+  <script src="accessory-search.js"></script> <!-- SMART-TALLES-ACCESSORY-SEARCH-SAFE-V1 -->
+</body></html>

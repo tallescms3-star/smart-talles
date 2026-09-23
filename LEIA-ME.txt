@@ -1,0 +1,22 @@
+CORREÇÃO DOS CARDS DE ACESSÓRIOS V2 — VERSÃO CORRIGIDA
+
+A primeira V2 procurava um arquivo que não existe no seu sistema.
+Esta versão NÃO depende de catalogo-ajustes.js.
+
+Ela usa o accessory-search.js que já está funcionando e carrega
+uma correção visual separada.
+
+Não altera app.js nem vendas.db.
+
+INSTALAÇÃO:
+1. Pare o servidor.
+2. Extraia este ZIP em:
+   C:\Users\Home\Documents\GitHub\smart-talles
+3. Execute:
+   INSTALAR_CORRECAO_CARDS_V2_CORRIGIDA.bat
+4. Inicie o servidor.
+5. Abra http://localhost:8080
+6. Pressione Ctrl+Shift+R.
+7. Teste Acessórios.
+
+Se aparecer qualquer erro, pare e envie um print.

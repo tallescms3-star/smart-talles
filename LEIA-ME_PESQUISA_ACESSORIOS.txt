@@ -1,0 +1,17 @@
+SMART TALLES — PESQUISA DE ACESSÓRIOS
+
+Esta atualização adiciona uma janela de pesquisa de acessórios com filtro instantâneo, imagens maiores e botão para adicionar diretamente ao orçamento.
+
+INSTALAÇÃO
+1. Extraia esta pasta dentro da pasta principal do projeto smart-talles.
+2. Execute EXECUTAR_PESQUISA_ACESSORIOS.bat.
+3. Abra o site local e teste a categoria Acessórios.
+4. No GitHub Desktop, confira os arquivos alterados. Devem ser apenas:
+   - www/index.html
+   - www/app.js
+   - www/style.css
+5. Faça o commit e Push pelo GitHub Desktop.
+
+A pesquisa procura por nome/modelo, marca, SKU, categoria, compatibilidade e descrição quando esses campos existirem no cadastro.
+
+O instalador não substitui os arquivos inteiros: ele faz inserções identificadas por marcador para preservar o restante do sistema.

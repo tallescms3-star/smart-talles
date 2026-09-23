@@ -1,0 +1,26 @@
+CORREÇÃO COMPLETA — SMART TALLES
+
+Reúne as duas alterações:
+1. Corrige as quebras de linha do WhatsApp.
+2. Move o Resumo do orçamento para antes dos botões.
+3. Salva o novo orçamento e envia a mensagem para o WhatsApp da Smart Talles.
+4. A mensagem inclui nome, número do orçamento, WhatsApp do cliente, todos os produtos/valores e total.
+5. Mantém DDI 55 e o nome antes do WhatsApp.
+6. O botão Contatar cliente do relatório abre a conversa do cliente com mensagem pronta e formatada.
+
+Arquivos alterados:
+www\app.js
+www\index.html
+www\admin.js
+
+Instalação:
+1. Extraia diretamente em C:\Users\Home\Documents\GitHub\smart-talles
+2. Execute EXECUTAR_ALTERACOES_COMPLETAS.bat
+3. Quando aparecer "CORRECAO COMPLETA APLICADA COM SUCESSO", feche.
+4. No GitHub Desktop, marque SOMENTE os 3 arquivos acima.
+5. Commit: Implementar resumo antes do envio e mensagens WhatsApp
+6. Push origin.
+7. Aguarde o Railway atualizar.
+
+
+IMPORTANTE: esta versão também corrige a formatação da mensagem 'Contatar cliente' mesmo se a versão anterior já estiver instalada.

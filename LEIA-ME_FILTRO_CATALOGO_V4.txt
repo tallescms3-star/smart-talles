@@ -1,0 +1,35 @@
+SMART TALLES - FILTRO DO CATALOGO V4
+
+Esta versao usa a Pesquisa de Acessorios Segura que ja esta funcionando.
+Em vez de tentar alterar o index.html, ela acrescenta o filtro ao
+accessory-search.js existente.
+
+INSTALACAO:
+1. Pare o servidor local.
+2. Extraia os arquivos deste pacote para:
+   C:\Users\Home\Documents\GitHub\smart-talles
+3. Execute:
+   INSTALAR_FILTRO_CATALOGO_V4_SEGURO.bat
+4. Inicie o servidor.
+5. Abra http://localhost:8080
+6. Pressione Ctrl + Shift + R.
+7. Va ate CATALOGO.
+
+A caixa deve aparecer acima dos cards:
+🔎 Pesquisar no catálogo: modelo, marca, nome ou SKU...
+
+PESQUISA:
+- modelo
+- marca
+- nome/descricao que estiver visivel no card
+- SKU quando estiver visivel
+
+SEGURANCA:
+- nao altera app.js
+- nao altera style.css
+- nao altera index.html
+- nao altera vendas.db
+- cria backup automatico do accessory-search.js
+
+Se o .bat disser que nao encontrou accessory-search.js, pare e envie
+uma foto da mensagem. NAO execute outro instalador.

@@ -1,0 +1,32 @@
+SMART TALLES - CORRECAO VISUAL DOS CARDS DE ACESSORIOS V2
+
+Esta versao corrige somente a apresentacao dos cards de acessorios.
+
+O que muda:
+- Mantem Acessorios como categoria padrao ao carregar o site.
+- Mantem as imagens maiores.
+- Coloca a imagem em uma area propria.
+- Coloca nome e preco abaixo da imagem.
+- Evita que o texto fique por cima da imagem.
+- Mantem o botao + dentro do card.
+- Mantem a pesquisa/filtro do catalogo.
+
+O que NAO muda:
+- app.js
+- style.css
+- vendas.db
+- produtos
+- precos
+- pesquisa do catalogo
+
+INSTALACAO
+1. Pare o servidor local.
+2. Extraia esta pasta dentro de:
+   C:\Users\Home\Documents\GitHub\smart-talles
+3. Execute:
+   INSTALAR_CORRECAO_CARDS_ACESSORIOS_V2.bat
+4. Inicie o servidor.
+5. Abra http://localhost:8080
+6. Pressione Ctrl + Shift + R.
+
+Se precisar desfazer, o instalador cria automaticamente um backup de www\catalogo-ajustes.js.
