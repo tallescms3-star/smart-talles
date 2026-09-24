@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -52,12 +52,20 @@
     </div>
   </section>
 
-  <section class="stats-grid" aria-label="Resumo do sistema">
-    <article class="stat-card"><span class="stat-icon">▦</span><div><small>Produtos</small><strong id="productCount">—</strong></div></article>
-    <article class="stat-card"><span class="stat-icon">◈</span><div><small>Marcas</small><strong id="brandCount">—</strong></div></article>
-    <article class="stat-card"><span class="stat-icon">▱</span><div><small>Orçamento atual</small><strong id="quoteNumberTop">0001</strong></div></article>
-    <article class="stat-card accent"><span class="stat-icon">✓</span><div><small>Atendimento</small><strong>WhatsApp</strong></div></article>
-  </section>
+<section class="stats-grid" aria-label="Resumo do sistema">
+  <article class="stat-card"><span class="stat-icon">▦</span><div><small>Produtos</small><strong id="productCount">—</strong></div></article>
+  <article class="stat-card"><span class="stat-icon">◈</span><div><small>Marcas</small><strong id="brandCount">—</strong></div></article>
+  <article class="stat-card"><span class="stat-icon">▱</span><div><small>Orçamento atual</small><strong id="quoteNumberTop">0001</strong></div></article>
+
+  <article class="stat-card accent"
+    role="button"
+    tabindex="0"
+    onclick="window.open('https://wa.me/5589999447494','_blank')"
+    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.open('https://wa.me/5589999447494','_blank')}">
+    <span class="stat-icon">✓</span>
+    <div><small>Atendimento</small><strong>WhatsApp</strong></div>
+  </article>
+</section>
 
   <section class="card shortcuts">
     <div class="section-title"><div><span class="eyebrow">ACESSO RÁPIDO</span><h2>O que você precisa?</h2></div></div>
@@ -101,7 +109,7 @@
     <div class="company-main"><div class="mini-logo"><img src="logo_smart_talles.png" alt="ST"></div><div><span class="eyebrow light">SOBRE A LOJA</span><h2>Smart Talles</h2><p>Manutenção de smartphones e computadores, com atendimento rápido, personalizado e eficiente.</p></div></div>
     <div class="company-details">
       <a href="https://www.google.com/maps/search/?api=1&query=R.%20Assad%20Kalume%2C%20Floriano%2C%20PI" target="_blank" rel="noopener"><span>📍</span><span><b>Localização</b><br>R. Assad Kalume, Centro — Floriano/PI</span></a>
-      <a href="https://wa.me/5589999447494" target="_blank" rel="noopener"><span>📱</span><span><b>WhatsApp</b><br>(89) 9 9944-7494</span></a>
+     <a href="https://wa.me/5589999447494" target="_blank" rel="noopener" onclick="window.open('https://wa.me/5589999447494','_blank'); return false;"><span>📱</span><span><b>WhatsApp</b><br>(89) 9 9944-7494</span></a>
       <a href="https://link.mercadopago.com.br/smarttalles" target="_blank" rel="noopener"><span>💳</span><span><b>Pagamento online</b><br>Mercado Pago</span></a>
       <a href="https://www.instagram.com/smart_talles/" target="_blank" rel="noopener" class="instagram-store"><span>📸</span><span><b>Instagram da loja</b><br>@smart_talles</span></a>
       <a href="https://www.instagram.com/tallescristhian/" target="_blank" rel="noopener" class="instagram-personal"><span>📸</span><span><b>Instagram pessoal</b><br>@tallescristhian</span></a>
@@ -118,6 +126,7 @@
 <button id="backToTop" class="back-to-top" type="button" aria-label="Rolar ao início" title="Rolar ao início"><span class="back-to-top-arrow">↑</span><span>INÍCIO</span></button>
 <footer><strong>SMART TALLES</strong><span>Floriano • Piauí</span><span>Desde 2011</span><span>Orçamentos & Vendas</span></footer>
 <script src="app.js"></script>
-  <script src="accessory-search.js"></script>
-    <script src="catalogo-ajustes.js"></script> <!-- SMART-TALLES-ACCESSORY-SEARCH-SAFE-V1 -->
-</body></html>
+<script src="accessory-search.js"></script>
+<script src="catalogo-ajustes.js"></script></body>
+</html>
+
