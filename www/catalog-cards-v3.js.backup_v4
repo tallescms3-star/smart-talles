@@ -1,0 +1,157 @@
+(function(){
+'use strict';
+
+var STYLE_ID='stCatalogCardsV3Style';
+
+function norm(v){
+  return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+}
+
+function apply(){
+  var grid=document.querySelector('#brandCards .accessory-grid');
+  if(!grid) return;
+
+  Array.from(grid.children).forEach(function(card){
+    if(!card || card.nodeType!==1) return;
+
+    card.classList.add('st-accessory-card-v3');
+
+    var info=card.querySelector('.accessory-info');
+    if(!info) return;
+
+    var b=info.querySelector('b');
+    var small=info.querySelector('small');
+
+    if(b) b.classList.add('st-accessory-title-v3');
+    if(small) small.classList.add('st-accessory-subtitle-v3');
+
+    /* Mantém somente duas linhas de identificação no catálogo.
+       O preço continua disponível na segunda linha quando já fizer parte
+       do conteúdo original do cartão. */
+    if(small){
+      small.title=small.textContent.trim();
+    }
+  });
+}
+
+function style(){
+  if(document.getElementById(STYLE_ID)) return;
+
+  var s=document.createElement('style');
+  s.id=STYLE_ID;
+  s.textContent=`
+    #brandCards .accessory-grid{
+      align-items:start !important;
+    }
+
+    #brandCards .accessory-grid > .st-accessory-card-v3{
+      position:relative !important;
+      display:flex !important;
+      flex-direction:column !important;
+      align-items:stretch !important;
+      justify-content:flex-start !important;
+      overflow:hidden !important;
+      min-height:0 !important;
+      padding:10px !important;
+      gap:7px !important;
+      box-sizing:border-box !important;
+    }
+
+    #brandCards .st-accessory-card-v3 > img{
+      display:block !important;
+      width:100% !important;
+      height:150px !important;
+      object-fit:contain !important;
+      object-position:center !important;
+      margin:0 auto !important;
+      flex:0 0 150px !important;
+    }
+
+    #brandCards .st-accessory-card-v3 .accessory-info{
+      display:flex !important;
+      flex-direction:column !important;
+      min-width:0 !important;
+      width:100% !important;
+      gap:2px !important;
+      padding:0 2px !important;
+      box-sizing:border-box !important;
+    }
+
+    #brandCards .st-accessory-card-v3 .st-accessory-title-v3,
+    #brandCards .st-accessory-card-v3 .st-accessory-subtitle-v3{
+      display:block !important;
+      width:100% !important;
+      min-width:0 !important;
+      overflow:hidden !important;
+      white-space:nowrap !important;
+      text-overflow:ellipsis !important;
+      line-height:1.25 !important;
+    }
+
+    #brandCards .st-accessory-card-v3 .st-accessory-title-v3{
+      font-size:15px !important;
+      font-weight:700 !important;
+    }
+
+    #brandCards .st-accessory-card-v3 .st-accessory-subtitle-v3{
+      font-size:13px !important;
+      opacity:.82 !important;
+    }
+
+    #brandCards .st-accessory-card-v3 .brand-arrow{
+      position:absolute !important;
+      right:8px !important;
+      bottom:8px !important;
+      z-index:3 !important;
+      width:30px !important;
+      height:30px !important;
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      border-radius:50% !important;
+    }
+
+    @media (max-width:700px){
+      #brandCards .accessory-grid > .st-accessory-card-v3{
+        padding:8px !important;
+        gap:6px !important;
+      }
+
+      #brandCards .st-accessory-card-v3 > img{
+        height:135px !important;
+        flex-basis:135px !important;
+      }
+
+      #brandCards .st-accessory-card-v3 .st-accessory-title-v3{
+        font-size:14px !important;
+      }
+
+      #brandCards .st-accessory-card-v3 .st-accessory-subtitle-v3{
+        font-size:12px !important;
+      }
+    }
+  `;
+  document.head.appendChild(s);
+}
+
+function init(){
+  style();
+  apply();
+
+  var root=document.getElementById('brandCards');
+  if(!root) return;
+
+  if(root.__stCatalogCardsV3Observer) return;
+  root.__stCatalogCardsV3Observer=true;
+
+  new MutationObserver(function(){
+    apply();
+  }).observe(root,{childList:true,subtree:true});
+}
+
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',init);
+}else{
+  init();
+}
+})();

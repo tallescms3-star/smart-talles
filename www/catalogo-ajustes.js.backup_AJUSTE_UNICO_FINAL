@@ -1,0 +1,141 @@
+/* SMART-TALLES - CORRECAO FINAL CATALOGO + WHATSAPP */
+(function(){
+'use strict';
+
+var WA='https://wa.me/5589999447494';
+var BOX='stCatalogFilterV4';
+var INPUT='stCatalogFilterInputV4';
+
+function norm(v){
+  return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+}
+
+function categoryIsAccessories(){
+  var c=document.getElementById('categorySelect');
+  return !c || norm(c.value)==='acessorios';
+}
+
+function cards(){
+  var root=document.getElementById('brandCards');
+  if(!root)return [];
+  var grid=root.querySelector('.accessory-grid');
+  return grid ? Array.from(grid.children) : [];
+}
+
+function filterCss(){
+  if(document.getElementById('st-final-filter-css'))return;
+  var s=document.createElement('style');
+  s.id='st-final-filter-css';
+  s.textContent=
+    '#'+BOX+'{margin:0 0 14px;padding:10px 12px;border:1px solid #dbe6ef;border-radius:12px;background:#fff;display:flex;align-items:center;gap:9px;box-sizing:border-box}'+
+    '#'+BOX+' .st-final-icon{font-size:18px}'+
+    '#'+BOX+' input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:15px;color:#17324d}'+
+    '#'+BOX+' .st-final-count{font-size:12px;color:#607080;white-space:nowrap}'+
+    '.st-final-hidden{display:none!important}';
+  document.head.appendChild(s);
+}
+
+function ensureFilterBox(){
+  var root=document.getElementById('brandCards');
+  if(!root)return null;
+  var box=document.getElementById(BOX);
+  if(box)return box;
+  filterCss();
+  box=document.createElement('div');
+  box.id=BOX;
+  box.innerHTML='<span class="st-final-icon">🔎</span><input id="'+INPUT+'" type="search" autocomplete="off" placeholder="Pesquisar no catálogo: modelo, marca, nome ou SKU..."><span class="st-final-count"></span>';
+  root.parentNode.insertBefore(box,root);
+  document.getElementById(INPUT).addEventListener('input',applyFilter);
+  return box;
+}
+
+function applyFilter(){
+  var box=document.getElementById(BOX), input=document.getElementById(INPUT);
+  if(!box||!input)return;
+  var q=norm(input.value), n=0;
+  cards().forEach(function(card){
+    var show=!q || norm(card.innerText||card.textContent).indexOf(q)>=0;
+    card.classList.toggle('st-final-hidden',!show);
+    if(show)n++;
+  });
+  var count=box.querySelector('.st-final-count');
+  if(count)count.textContent=q ? n+' encontrado'+(n===1?'':'s') : '';
+}
+
+function syncFilter(){
+  var box=ensureFilterBox();
+  if(!box)return;
+  box.style.display=categoryIsAccessories()?'flex':'none';
+  if(!categoryIsAccessories()){
+    var input=document.getElementById(INPUT);
+    if(input)input.value='';
+    cards().forEach(function(c){c.classList.remove('st-final-hidden')});
+    var count=box.querySelector('.st-final-count');
+    if(count)count.textContent='';
+  }else{
+    applyFilter();
+  }
+}
+
+function initFilter(){
+  syncFilter();
+  var c=document.getElementById('categorySelect');
+  if(c)c.addEventListener('change',function(){setTimeout(syncFilter,0)});
+  var root=document.getElementById('brandCards');
+  if(root && !root.__stFinalFilter){
+    root.__stFinalFilter=true;
+    new MutationObserver(function(){setTimeout(syncFilter,0)}).observe(root,{childList:true,subtree:true});
+  }
+}
+
+function setupWhatsApp(){
+  var all=document.querySelectorAll('body *');
+  all.forEach(function(el){
+    if(el.__stWhatsAppBound)return;
+    var text=norm(el.textContent||'');
+    if(text==='atendimento whatsapp' || text==='whatsapp'){
+      el.__stWhatsAppBound=true;
+      el.style.cursor='pointer';
+      el.setAttribute('title','Falar diretamente pelo WhatsApp');
+      el.setAttribute('role','link');
+      el.addEventListener('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        window.open(WA,'_blank','noopener,noreferrer');
+      });
+    }
+  });
+  document.querySelectorAll('a').forEach(function(a){
+    if(norm(a.textContent||'').indexOf('atendimento')>=0 && norm(a.textContent||'').indexOf('whatsapp')>=0){
+      a.href=WA;
+      a.target='_blank';
+      a.rel='noopener noreferrer';
+    }
+  });
+}
+
+function init(){
+  setupWhatsApp();
+  initFilter();
+  var c=document.getElementById('categorySelect');
+  if(c && typeof window.setCategory==='function'){
+    var old=window.setCategory;
+    if(!old.__stFinalWrapped){
+      function wrapped(v){
+        var r=old.apply(this,arguments);
+        setTimeout(syncFilter,0);
+        return r;
+      }
+      wrapped.__stFinalWrapped=true;
+      window.setCategory=wrapped;
+    }
+  }
+  setInterval(function(){
+    setupWhatsApp();
+    syncFilter();
+  },1000);
+}
+
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+else init();
+})();

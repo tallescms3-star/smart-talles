@@ -1,0 +1,229 @@
+/* SMART-TALLES - AJUSTE FINAL CATALOGO V2
+   - Acessórios como categoria inicial
+   - Filtro de catálogo funcional
+   - Atendimento WhatsApp como link direto
+   - Mantém o visual atual dos cartões
+*/
+(function(){
+  'use strict';
+
+  var WA_URL = 'https://wa.me/5589999447494';
+
+  function setAcessoriosComoPadrao(){
+    var c = document.getElementById('categorySelect');
+    if(!c) return false;
+    if(typeof window.setCategory === 'function'){
+      if(c.value !== 'Acessórios') window.setCategory('Acessórios');
+    }else{
+      c.value = 'Acessórios';
+      c.dispatchEvent(new Event('change',{bubbles:true}));
+    }
+    return true;
+  }
+
+  function instalarVisual(){
+    if(document.getElementById('st-catalogo-final-v2-css')) return;
+    var s = document.createElement('style');
+    s.id = 'st-catalogo-final-v2-css';
+    s.textContent = `
+      #brandCards .accessory-grid{align-items:start!important}
+      #brandCards .accessory-grid>.accessory-card{
+        position:relative!important;display:flex!important;flex-direction:column!important;
+        align-items:stretch!important;justify-content:flex-start!important;box-sizing:border-box!important;
+        min-width:0!important;min-height:235px!important;height:auto!important;padding:10px!important;
+        gap:7px!important;overflow:hidden!important;text-align:left!important;float:none!important;transform:none!important
+      }
+      #brandCards .accessory-grid>.accessory-card>img{
+        position:static!important;display:block!important;width:100%!important;height:158px!important;
+        min-height:158px!important;max-height:158px!important;object-fit:contain!important;
+        object-position:center!important;margin:0!important;padding:0!important;box-sizing:border-box!important;
+        flex:none!important;order:1!important
+      }
+      #brandCards .accessory-grid>.accessory-card>.accessory-info{
+        position:static!important;display:flex!important;flex-direction:column!important;
+        align-items:flex-start!important;width:calc(100% - 40px)!important;min-width:0!important;
+        height:40px!important;max-height:40px!important;margin:0!important;padding:0 2px!important;
+        box-sizing:border-box!important;overflow:hidden!important;order:2!important;gap:1px!important
+      }
+      #brandCards .accessory-grid>.accessory-card>.accessory-info>b{
+        display:-webkit-box!important;width:100%!important;height:38px!important;max-height:38px!important;
+        overflow:hidden!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;
+        white-space:normal!important;margin:0!important;padding:0!important;line-height:19px!important;
+        font-size:14px!important;font-weight:700!important
+      }
+      #brandCards .accessory-grid>.accessory-card>.accessory-info>small{display:none!important}
+      #brandCards .accessory-grid>.accessory-card>.brand-arrow{
+        position:absolute!important;right:8px!important;bottom:8px!important;top:auto!important;left:auto!important;
+        width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important;
+        display:flex!important;align-items:center!important;justify-content:center!important;margin:0!important;
+        padding:0!important;z-index:5!important
+      }
+      #st-catalogo-filtro-wrap{
+        width:100%!important;box-sizing:border-box!important;
+        margin:0 0 14px 0!important;display:flex!important;align-items:center!important;
+        gap:8px!important;
+      }
+      #st-catalogo-filtro{
+        width:100%!important;box-sizing:border-box!important;
+        padding:12px 14px!important;border:1px solid #d7e1ea!important;
+        border-radius:12px!important;background:#fff!important;color:#14213d!important;
+        font-size:15px!important;outline:none!important;
+      }
+      #st-catalogo-filtro:focus{border-color:#0b6b9f!important;box-shadow:0 0 0 3px rgba(11,107,159,.10)!important}
+      #st-catalogo-filtro::placeholder{color:#7a8795!important}
+      #st-catalogo-filtro-clear{
+        flex:0 0 auto!important;border:0!important;border-radius:10px!important;
+        padding:10px 12px!important;background:#eef6fa!important;color:#0b6b9f!important;
+        cursor:pointer!important;font-weight:700!important;
+      }
+      #st-catalogo-filtro-status{
+        font-size:12px!important;color:#6d7782!important;margin:-8px 0 12px 2px!important;
+        min-height:16px!important;
+      }
+      @media(max-width:700px){
+        #brandCards .accessory-grid>.accessory-card{min-height:215px!important;padding:8px!important}
+        #brandCards .accessory-grid>.accessory-card>img{height:145px!important;min-height:145px!important;max-height:145px!important}
+        #brandCards .accessory-grid>.accessory-card>.accessory-info>b{font-size:13px!important;line-height:18px!important;height:36px!important;max-height:36px!important}
+        #brandCards .accessory-grid>.accessory-card>.accessory-info{height:38px!important;max-height:38px!important}
+      }
+    `;
+    document.head.appendChild(s);
+  }
+
+  function encontrarAlvoFiltro(){
+    return document.getElementById('brandCards');
+  }
+
+  function aplicarFiltro(){
+    var brandCards = encontrarAlvoFiltro();
+    if(!brandCards) return;
+
+    var old = document.querySelectorAll('#st-catalogo-filtro-wrap');
+    old.forEach(function(el){ if(el.parentNode) el.parentNode.removeChild(el); });
+
+    if(document.getElementById('categorySelect') && document.getElementById('categorySelect').value !== 'Acessórios'){
+      return;
+    }
+
+    var wrap = document.createElement('div');
+    wrap.id = 'st-catalogo-filtro-wrap';
+
+    var input = document.createElement('input');
+    input.id = 'st-catalogo-filtro';
+    input.type = 'search';
+    input.autocomplete = 'off';
+    input.placeholder = '🔎 Pesquisar / filtrar acessórios...';
+
+    var clear = document.createElement('button');
+    clear.id = 'st-catalogo-filtro-clear';
+    clear.type = 'button';
+    clear.textContent = 'Limpar';
+
+    wrap.appendChild(input);
+    wrap.appendChild(clear);
+
+    brandCards.parentNode.insertBefore(wrap, brandCards);
+
+    var status = document.createElement('div');
+    status.id = 'st-catalogo-filtro-status';
+    status.textContent = '';
+    brandCards.parentNode.insertBefore(status, brandCards);
+
+    function filtrar(){
+      var termo = (input.value || '').trim().toLocaleLowerCase('pt-BR');
+      var cards = brandCards.querySelectorAll('.accessory-grid > .accessory-card');
+      var total = cards.length, visiveis = 0;
+
+      cards.forEach(function(card){
+        var texto = (card.innerText || card.textContent || '').toLocaleLowerCase('pt-BR');
+        var ok = !termo || texto.indexOf(termo) !== -1;
+        card.style.display = ok ? '' : 'none';
+        if(ok) visiveis++;
+      });
+
+      if(termo){
+        status.textContent = visiveis + ' de ' + total + ' acessório(s) encontrado(s).';
+      }else{
+        status.textContent = '';
+      }
+    }
+
+    input.addEventListener('input', filtrar);
+    clear.addEventListener('click', function(){
+      input.value = '';
+      filtrar();
+      input.focus();
+    });
+
+    filtrar();
+  }
+
+  var filtroObserver = null;
+  var filtroTimer = null;
+  function observarCatalogo(){
+    var alvo = document.getElementById('brandCards');
+    if(!alvo) return;
+    if(filtroObserver) filtroObserver.disconnect();
+    filtroObserver = new MutationObserver(function(){
+      clearTimeout(filtroTimer);
+      filtroTimer = setTimeout(function(){
+        var input = document.getElementById('st-catalogo-filtro');
+        var termo = input ? input.value : '';
+        aplicarFiltro();
+        var novo = document.getElementById('st-catalogo-filtro');
+        if(novo && termo){
+          novo.value = termo;
+          novo.dispatchEvent(new Event('input',{bubbles:true}));
+        }
+      },80);
+    });
+    filtroObserver.observe(alvo,{childList:true,subtree:true});
+  }
+
+  function tornarWhatsAppDireto(){
+    var elems = document.querySelectorAll('a,button,[role="button"]');
+    elems.forEach(function(el){
+      var txt = (el.innerText || el.textContent || '').trim().toLocaleLowerCase('pt-BR');
+      if(txt.indexOf('atendimento whatsapp') !== -1 || txt === 'whatsapp'){
+        if(el.tagName.toLowerCase() === 'a'){
+          el.href = WA_URL;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+        }else{
+          el.onclick = function(ev){
+            ev.preventDefault();
+            window.open(WA_URL,'_blank','noopener,noreferrer');
+          };
+        }
+      }
+    });
+  }
+
+  function init(){
+    instalarVisual();
+    setAcessoriosComoPadrao();
+    aplicarFiltro();
+    observarCatalogo();
+    tornarWhatsAppDireto();
+
+    var n = 0;
+    var timer = setInterval(function(){
+      n++;
+      setAcessoriosComoPadrao();
+      aplicarFiltro();
+      tornarWhatsAppDireto();
+      if(n >= 30) clearInterval(timer);
+    },300);
+
+    var bodyObserver = new MutationObserver(function(){
+      tornarWhatsAppDireto();
+    });
+    if(document.body) bodyObserver.observe(document.body,{childList:true,subtree:true});
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded',init);
+  }else{
+    init();
+  }
+})();
